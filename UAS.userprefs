@@ -2,7 +2,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\SoundVisual.cs">
     <Files>
-      <File FileName="Assets\Script\SoundVisual.cs" Line="80" Column="3" />
+      <File FileName="Assets\Script\SoundVisual.cs" Line="119" Column="3" />
+      <File FileName="Assets\Script\NoteScript.cs" Line="13" Column="1" />
+      <File FileName="Assets\Script\GM.cs" Line="96" Column="14" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
