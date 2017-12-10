@@ -1,10 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\SoundVisual.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\MenuScript.cs">
     <Files>
-      <File FileName="Assets\Script\SoundVisual.cs" Line="119" Column="3" />
-      <File FileName="Assets\Script\NoteScript.cs" Line="13" Column="1" />
-      <File FileName="Assets\Script\GM.cs" Line="96" Column="14" />
+      <File FileName="Assets\Script\SoundVisual.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\NoteScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\GM.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\MenuScript.cs" Line="30" Column="21" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
