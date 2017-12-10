@@ -1,22 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GM : MonoBehaviour {
 
 	// Use this for initialization
-	List<float> whichNote = new List<float>() {1,2,3,4,2,5,2,1,2,3,5,4,4,3,5,5,1,2,4,1,1,4,5,5};
+	List<float> whichNote = new List<float>() {1,2,3,4,2,5,2,1,2,3,5,4,4,3,5,5,1,2,4,1,1,4,5,5,1,2,3,4,2,5,2,1,2,3,5,4,4,3,5,5,1,2,4,1,1,4,5,5,1,2,3,4,2,5,2,1,2,3,5,4,4,3,5,5,1,2,4,1,1,4,5,5,1,2,3,4,2,5,2,1,2,3,5,4,4,3,5,5,1,2,4,1,1,4,5,5};
+	//List<float> whichNote = new List<float>() {1,2,3,4};
 	public int noteMark =0, combo=0;
 	public Transform noteObj;
 	public string timerReset="y";
-	public float xPos, score;
+	public float xPos, score, delayScorePane=3;
 	public GameObject[] notePerfectColliders, noteGoodColliders, noteBadColliders;
-	public GameObject perfectText, goodText, badText, missedText, comboText, scoreText;
+	public GameObject perfectText, goodText, badText, missedText, comboText, scoreText, scorePanel, finalScoreText, pausePanel;
 	private string activeText;
+	private Text txtFinalScore;
 	private bool qPress, wPress, ePress, rPress, tPress, isPaused = false;
 	private TextMesh comboTextMesh, scoreTextMesh;
 
+
 	void Start () {
+
+		scorePanel = GameObject.Find("Score Panel");
+		finalScoreText = GameObject.Find ("Final Score Text");
+		scorePanel.SetActive (false);
+		pausePanel = GameObject.Find ("Pause Panel");
+		pausePanel.SetActive (false);
 
 		comboTextMesh = comboText.GetComponent(typeof(TextMesh)) as TextMesh;
 		scoreTextMesh = scoreText.GetComponent(typeof(TextMesh)) as TextMesh;
@@ -36,12 +46,19 @@ public class GM : MonoBehaviour {
 		goodText.gameObject.SetActive(false);
 		qPress = wPress = ePress = rPress = tPress = false;
 	}
-	
+		
+
 	// Update is called once per frame
 	void Update ()
 	{
 		if (noteMark == whichNote.Count) {
 			//Move to result screen
+			delayScorePane -= Time.deltaTime;
+			if (delayScorePane <= 0f) {
+				scorePanel.SetActive (true);
+				(finalScoreText.GetComponent<Text> ()).text = "YOUR SCORE : "+ (int)score;
+
+			}
 		}
 		else if (timerReset == "y") {
 			StartCoroutine (spawnNote ());
@@ -92,9 +109,11 @@ public class GM : MonoBehaviour {
 		}
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			if (Time.timeScale == 1) {
+				pausePanel.SetActive (true);
 				Time.timeScale = 0;
 				isPaused = true;
 			}else {
+				pausePanel.SetActive (false);
 				Time.timeScale = 1;
 				isPaused = false;
 			}
