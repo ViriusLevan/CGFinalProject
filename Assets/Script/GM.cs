@@ -6,17 +6,21 @@ public class GM : MonoBehaviour {
 
 	// Use this for initialization
 	List<float> whichNote = new List<float>() {1,2,3,4,2,5,2,1,2,3,5,4,4,3,5,5,1,2,4,1,1,4,5,5};
-	public int noteMark =0;
+	public int noteMark =0, combo=0;
 	public Transform noteObj;
 	public string timerReset="y";
-	public float xPos;
+	public float xPos, score;
 	public GameObject[] notePerfectColliders, noteGoodColliders, noteBadColliders;
-	public GameObject perfectText, goodText, badText, missedText;
-	public static int combo = 0;
+	public GameObject perfectText, goodText, badText, missedText, comboText, scoreText;
 	private string activeText;
-	public bool qPress, wPress, ePress, rPress, tPress;
+	private bool qPress, wPress, ePress, rPress, tPress, isPaused = false;
+	private TextMesh comboTextMesh, scoreTextMesh;
 
 	void Start () {
+
+		comboTextMesh = comboText.GetComponent(typeof(TextMesh)) as TextMesh;
+		scoreTextMesh = scoreText.GetComponent(typeof(TextMesh)) as TextMesh;
+
 	 	foreach(GameObject g in notePerfectColliders){
 			g.gameObject.SetActive(false);
 		}
@@ -36,76 +40,89 @@ public class GM : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		if (timerReset == "y") {
+		if (noteMark == whichNote.Count) {
+			//Move to result screen
+		}
+		else if (timerReset == "y") {
 			StartCoroutine (spawnNote ());
 			timerReset = "n";
 		}
-		if (combo > 1) {
-			//display 
-		}
 
-		if (Input.GetKeyDown ("q") && !qPress) {
-			if (notePerfectColliders [0].gameObject.activeSelf == false) {
-				qPress = true;
-				StartCoroutine (qPressed());
+		if (Time.timeScale == 1) {
+			if (Input.GetKeyDown ("q") && !qPress) {
+				if (notePerfectColliders [0].gameObject.activeSelf == false) {
+					qPress = true;
+					StartCoroutine (qPressed ());
+				}
+			}
+			//		if (Input.GetKeyUp ("q")) {
+			//		}
+			if (Input.GetKeyDown ("w") && !wPress) {
+				if (notePerfectColliders [1].gameObject.activeSelf == false) {
+					wPress = true;
+					StartCoroutine (wPressed ());
+				}
+			}
+			//		if (Input.GetKeyUp ("w")) {
+			//		}
+			if (Input.GetKeyDown ("e") && !ePress) {
+				if (notePerfectColliders [2].gameObject.activeSelf == false) {
+					ePress = true;
+					StartCoroutine (ePressed ());
+				}
+			}
+			//		if (Input.GetKeyUp ("e")) {
+			//		}
+			if (Input.GetKeyDown ("r") && !rPress) {
+				if (notePerfectColliders [3].gameObject.activeSelf == false) {
+					rPress = true;
+					StartCoroutine (rPressed ());
+				}
+			}
+			//		if (Input.GetKeyUp ("r")) {
+			//		}
+			if (Input.GetKeyDown ("t") && !tPress) {
+				if (notePerfectColliders [4].gameObject.activeSelf == false) {
+					tPress = true;
+					StartCoroutine (tPressed ());
+				}
+			}
+			//		if (Input.GetKeyUp ("t")) {
+			//		}
+		}
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			if (Time.timeScale == 1) {
+				Time.timeScale = 0;
+				isPaused = true;
+			}else {
+				Time.timeScale = 1;
+				isPaused = false;
 			}
 		}
-//		if (Input.GetKeyUp ("q")) {
-//		}
-		if (Input.GetKeyDown ("w") && !wPress) {
-			if (notePerfectColliders [1].gameObject.activeSelf == false) {
-				wPress = true;
-				StartCoroutine (wPressed());
-			}
-		}
-//		if (Input.GetKeyUp ("w")) {
-//		}
-		if (Input.GetKeyDown ("e")) {
-			if (notePerfectColliders [2].gameObject.activeSelf == false) {
-				ePress = true;
-				StartCoroutine (ePressed());
-			}
-		}
-//		if (Input.GetKeyUp ("e")) {
-//		}
-		if (Input.GetKeyDown ("r")) {
-			if (notePerfectColliders [3].gameObject.activeSelf == false) {
-				rPress = true;
-				StartCoroutine (rPressed());
-			}
-		}
-//		if (Input.GetKeyUp ("r")) {
-//		}
-		if (Input.GetKeyDown ("t")) {
-			if (notePerfectColliders [4].gameObject.activeSelf == false) {
-				tPress = true;
-				StartCoroutine (tPressed());
-			}
-		}
-//		if (Input.GetKeyUp ("t")) {
-//		}
 	}
 
 	IEnumerator spawnNote ()
 	{
-		yield return new WaitForSeconds (1);
+		if (!isPaused) {
+			yield return new WaitForSeconds (1);
 
-		if (whichNote [noteMark] == 1) {
-			xPos = -4;//leftmost note
-		}else if (whichNote [noteMark] == 2) {
-			xPos = -2;
-		}else if (whichNote [noteMark] == 3) {
-			xPos = 0;
-		}else if (whichNote [noteMark] == 4) {
-			xPos = 2;
-		}else if (whichNote [noteMark] == 5) {
-			xPos = 4;
+			if (whichNote [noteMark] == 1) {
+				xPos = -4;//leftmost note
+			} else if (whichNote [noteMark] == 2) {
+				xPos = -2;
+			} else if (whichNote [noteMark] == 3) {
+				xPos = 0;
+			} else if (whichNote [noteMark] == 4) {
+				xPos = 2;
+			} else if (whichNote [noteMark] == 5) {
+				xPos = 4;
+			}
+
+			Debug.Log (xPos);
+			noteMark += 1;
+			timerReset = "y";
+			Instantiate (noteObj, new Vector3 (xPos, 5.0f, -4.25f), noteObj.rotation);
 		}
-
-		Debug.Log(xPos);
-		noteMark += 1;
-		timerReset = "y";
-		Instantiate(noteObj, new Vector3(xPos,5.0f,-4.25f), noteObj.rotation);
 	}
 
 	IEnumerator qPressed(){
@@ -221,5 +238,20 @@ public class GM : MonoBehaviour {
 				activeText = "Missed";
 			}
 		}
+	}
+
+	public void editScore (int modifier)
+	{
+		if (modifier < 5) {
+			combo = 0;
+			comboTextMesh.text ="";
+		} else {
+			combo = combo + 1;
+			comboTextMesh.text = ""+(combo/2);//bugged
+		}
+		Debug.Log("Modifier :" +modifier+ "\n Combo:"+combo);
+		score += modifier + (0.1f * combo);
+		if(score<0)score =0;
+		scoreTextMesh.text = "Score\n"+ ((int)score);
 	}
 }
