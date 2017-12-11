@@ -1,13 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\GameVisual.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\GM2.cs">
     <Files>
-      <File FileName="Assets\Script\SoundVisual.cs" Line="133" Column="3" />
+      <File FileName="Assets\Script\SoundVisual.cs" Line="134" Column="48" />
       <File FileName="Assets\Script\NoteScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\GM.cs" Line="9" Column="236" />
-      <File FileName="Assets\Script\MenuScript.cs" Line="4" Column="35" />
+      <File FileName="Assets\Script\GM.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\MenuScript.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\GoHomeScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\GameVisual.cs" Line="50" Column="49" />
+      <File FileName="Assets\Script\GameVisual.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\GM2.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

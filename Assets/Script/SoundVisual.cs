@@ -114,6 +114,8 @@ public class SoundVisual : MonoBehaviour {
 		backgroundMaterial.color= Color.Lerp (minColor, maxColor, backgroundIntensity);
 	}
 
+	private string abc;
+
 	private void AnalyzeSound(){
 		source.GetOutputData (samples, 0);
 
@@ -127,6 +129,12 @@ public class SoundVisual : MonoBehaviour {
 
 		//Get the DB Value
 		dbValue = 20*Mathf.Log10(rmsValue/0.1f);
+
+		if (dbValue > 10.35f) {
+			abc += ((int)Random.Range (1f, 5.4f) + ",");
+		}
+
+		Debug.Log (abc);
 
 		//Get sound spectrum
 		source.GetSpectrumData(spectrum, 0, FFTWindow.BlackmanHarris);

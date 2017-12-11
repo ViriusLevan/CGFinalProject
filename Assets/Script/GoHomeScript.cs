@@ -15,8 +15,24 @@ public class GoHomeScript : MonoBehaviour {
 		
 	}
 
-	public void retry() {
+	public void retry1() {
 		SceneManager.LoadScene ("Play");
+	}
+
+	public void retry2() {
+		SceneManager.LoadScene ("Play2");
+	}
+
+	public void retry3() {
+		SceneManager.LoadScene ("Play3");
+	}
+
+	public void retry4() {
+		SceneManager.LoadScene ("Play4");
+	}
+
+	public void retry5() {
+		SceneManager.LoadScene ("Play5");
 	}
 
 	public void goHome() {

@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class GM : MonoBehaviour {
 
 	// Use this for initialization
-	List<float> whichNote = new List<float>() {1,2,3,4,2,5,2,1,2,3,5,4,4,3,5,5,1,2,4,1,1,4,5,5,1,2,3,4,2,5,2,1,2,3,5,4,4,3,5,5,1,2,4,1,1,4,5,5,1,2,3,4,2,5,2,1,2,3,5,4,4,3,5,5,1,2,4,1,1,4,5,5,1,2,3,4,2,5,2,1,2,3,5,4,4,3,5,5,1,2,4,1,1,4,5,5};
+	// List<float> whichNote = new List<float>() {1,2,3,4,2,5,2,1,2,3,5,4,4,3,5,5,1,2,4,1,1,4,5,5,1,2,3,4,2,5,2,1,2,3,5,4,4,3,5,5,1,2,4,1,1,4,5,5,1,2,3,4,2,5,2,1,2,3,5,4,4,3,5,5,1,2,4,1,1,4,5,5,1,2,3,4,2,5,2,1,2,3,5,4,4,3,5,5,1,2,4,1,1,4,5,5};
+	List<float> whichNote = new List<float>() {0,0,0,1,0,1,2,3,0,5,4,0,4,3,2,1,0,0,0,1,2,3,5,4,0,0,1,0,2,3,5,4,0,0,0,1,0,1,2,3,0,5,4,0,4,3,2,1,0,0,0,1,2,3,5,4,0,0,1,0,2,3,5,4,0,0,0,1,0,1,2,3,0,5,4,0,4,3,2,1,0,0,0,1,2,3,5,4,0,0,1,0,2,3,5,4,0,0,0,1,0,1,2,3,0,5,4,0,4,3,2,1,0,0,0,1,2,3,5,4,0,0,1,0,2,3,5,4,0,0,0,0,1,0,1,0,1,0,1,0,2,0,2,0,2,0,2,0,3,0,3,0,3,0,3,0,4,0,4,0,4,0,4,0,5,0,5,0,5,0,5,0,1,0,1,0,2,0,2,0,3,0,3,0,4,0,4,0,5,0,5,0,3,0,3,0};
 	//List<float> whichNote = new List<float>() {1,2,3,4};
 	public int noteMark =0, combo=0;
 	public Transform noteObj;
@@ -31,7 +32,7 @@ public class GM : MonoBehaviour {
 		comboTextMesh = comboText.GetComponent(typeof(TextMesh)) as TextMesh;
 		scoreTextMesh = scoreText.GetComponent(typeof(TextMesh)) as TextMesh;
 
-	 	foreach(GameObject g in notePerfectColliders){
+		foreach(GameObject g in notePerfectColliders){
 			g.gameObject.SetActive(false);
 		}
 		foreach(GameObject g in noteGoodColliders){
@@ -39,14 +40,14 @@ public class GM : MonoBehaviour {
 		}
 		foreach(GameObject g in noteBadColliders){
 			g.gameObject.SetActive(false);
-	 	}
+		}
 		perfectText.gameObject.SetActive(false);
 		missedText.gameObject.SetActive(false);
 		badText.gameObject.SetActive(false);
 		goodText.gameObject.SetActive(false);
 		qPress = wPress = ePress = rPress = tPress = false;
 	}
-		
+
 
 	// Update is called once per frame
 	void Update ()
@@ -123,24 +124,27 @@ public class GM : MonoBehaviour {
 	IEnumerator spawnNote ()
 	{
 		if (!isPaused) {
-			yield return new WaitForSeconds (1);
+			yield return new WaitForSeconds (0.215f);
 
-			if (whichNote [noteMark] == 1) {
-				xPos = -4;//leftmost note
-			} else if (whichNote [noteMark] == 2) {
-				xPos = -2;
-			} else if (whichNote [noteMark] == 3) {
-				xPos = 0;
-			} else if (whichNote [noteMark] == 4) {
-				xPos = 2;
-			} else if (whichNote [noteMark] == 5) {
-				xPos = 4;
+			if	(whichNote[noteMark]!=0){
+				if (whichNote [noteMark] == 1) {
+					xPos = -4;//leftmost note
+				} else if (whichNote [noteMark] == 2) {
+					xPos = -2;
+				} else if (whichNote [noteMark] == 3) {
+					xPos = 0;
+				} else if (whichNote [noteMark] == 4) {
+					xPos = 2;
+				} else if (whichNote [noteMark] == 5) {
+					xPos = 4;
+				}
+				Debug.Log (xPos);
+				// noteMark += 1;
+				Instantiate (noteObj, new Vector3 (xPos, 5.0f, -4.25f), noteObj.rotation);
 			}
-
-			Debug.Log (xPos);
 			noteMark += 1;
 			timerReset = "y";
-			Instantiate (noteObj, new Vector3 (xPos, 5.0f, -4.25f), noteObj.rotation);
+
 		}
 	}
 
@@ -235,37 +239,37 @@ public class GM : MonoBehaviour {
 
 			if(activeText == "Perfect"){
 				perfectText.SetActive (false);
-			}else if(activeText == "Good"){
-				goodText.SetActive(false);
-			}else if(activeText == "Bad"){
-				badText.SetActive(false);
-			}else if(activeText == "Missed"){
-				missedText.SetActive (false);
-			}
+				}else if(activeText == "Good"){
+					goodText.SetActive(false);
+					}else if(activeText == "Bad"){
+						badText.SetActive(false);
+						}else if(activeText == "Missed"){
+							missedText.SetActive (false);
+						}
 
-			if (name == "Perfect") {
-				perfectText.SetActive (true);
-				activeText = "Perfect";
-			}else if(name == "Good"){
-				goodText.SetActive(true);
-				activeText = "Good";
-			}else if(name == "Bad"){
-				badText.SetActive(true);
-				activeText = "Bad";
-			}else if (name == "Missed") {
-				missedText.SetActive (true);
-				activeText = "Missed";
-			}
-		}
-	}
+						if (name == "Perfect") {
+							perfectText.SetActive (true);
+							activeText = "Perfect";
+							}else if(name == "Good"){
+								goodText.SetActive(true);
+								activeText = "Good";
+								}else if(name == "Bad"){
+									badText.SetActive(true);
+									activeText = "Bad";
+									}else if (name == "Missed") {
+										missedText.SetActive (true);
+										activeText = "Missed";
+									}
+								}
+							}
 
-	public void editScore (int modifier)
-	{
-		if (modifier < 5) {
-			combo = 0;
-			comboTextMesh.text ="";
-		} else {
-			combo = combo + 1;
+							public void editScore (int modifier)
+							{
+								if (modifier < 5) {
+									combo = 0;
+									comboTextMesh.text ="";
+								} else {
+									combo = combo + 1;
 			comboTextMesh.text = ""+(combo/2);//bugged
 		}
 		Debug.Log("Modifier :" +modifier+ "\n Combo:"+combo);
